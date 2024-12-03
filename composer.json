@@ -3,6 +3,8 @@
     "description": "A simple PHP app",
     "require": {
         "php": "^7.4 || ^8.0",
-        "ext-pdo-sqlite": "*"
+        "ext-pdo_mysql": "*",
+        "ext-pdo": "*",
+        "ext-mysqli": "*"
     }
 }
