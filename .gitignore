@@ -1,0 +1,18 @@
+# Ignore environment and sensitive data
+.env
+*.env
+
+# Ignore backup files
+*.bak
+*.tmp
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+/src/database.db
+

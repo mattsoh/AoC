@@ -1,0 +1,19 @@
+Welcome from Santa!
+
+He has a little issue:
+
+Lately he has been using computers to enhance the speed of his elves. But there's a slight issue.
+
+Coding counts from 0, but he wants to count from 1 (who wants to get 0 presents).
+
+Take a number, the number of presents Timmy will receive, and output that number + 1.
+
+E.g. 
+
+Input:
+
+10
+
+Output:
+
+11 (which is 10 + 1)
