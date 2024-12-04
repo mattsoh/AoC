@@ -1,0 +1,21 @@
+Now, Santa needs you to add up piles of presents. He has too many! Enter the number of presents in each pile, separated by spaces:
+For example, if you have three piles with 5, 10, and 15 presents, he will enter 
+
+5 10 15
+
+Help him then calculate the total number of presents to send!
+
+In this case, it's just
+
+30
+
+Let's help Santa manage his presents!
+
+Hint: use
+
+presents = input().split()
+
+Then run a for loop:
+
+for present in presents:
+    # Add int(present) to a count
