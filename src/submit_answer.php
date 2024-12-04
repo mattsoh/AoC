@@ -5,10 +5,17 @@
 
 // Optionally, verify that the challenge exists for the specified day
 require_once 'database.php'; // Adjust the path as necessary
+$submission_time = new DateTime(new DateTimeZone('UTC'));
+$start_time = new DateTime("2024-12-{$day} 08:30:00", new DateTimeZone('UTC'));
+if ($submission_time < $start_time) {
+    echo 'Challenge not yet unlocked.';
+    exit;
+}
 global $day;
 $stmt = $db->prepare('SELECT challenge_id FROM user_challenges WHERE user_id = ? AND day = ?');
 $stmt->execute([$_SESSION['user_id'], $day]);
 $challenge = $stmt->fetch(PDO::FETCH_ASSOC);
+
 if (!$challenge) {
     die('Specified challenge does not exist. Maybe read the input first?');
 }
@@ -39,15 +46,8 @@ if (trim($user_answer) === trim($expected_output)) {
         echo '<a href="/dashboard.php">Back to dashboard</a>';
         exit;
     }
-    // Calculate the score based on the time of submission
-    $submission_time = new DateTime();
-    $start_time = new DateTime("2024-12-{$day} 08:30:00");
     $interval = $start_time->diff($submission_time);
     $minutes = $interval->days * 24 * 60 + $interval->h * 60 + $interval->i;
-    if ($minutes < 0){
-        echo 'Challenge not yet unlocked.';
-        exit;
-    }
     if ($minutes <= 60) {
         $score = 100 - ($minutes);
     } elseif ($minutes <= 300) {

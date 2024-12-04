@@ -18,5 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Include the submit_answer logic
         require_once '../src/submit_answer.php';
     }
+} else{
+    echo "Don't even try...";
 }
 ?>
