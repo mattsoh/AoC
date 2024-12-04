@@ -24,7 +24,7 @@ $stmt->execute([$day]);
 $release_day = $stmt->fetchColumn();
 
 if (!$release_day) {
-    echo 'Challenge not found.';
+    echo 'Challenge not found (yet).';
     exit;
 }
 // Check if the current date is after the release date
@@ -35,8 +35,8 @@ if ($current_date < $release_date) {
     echo 'Please wait until the challenge unlocks.';
     exit;
 }
-echo 'Challenge not found.';
-exit;
+// echo 'Challenge not found.';
+// exit;
 $user_id = $_SESSION['user_id'];
 // Function to assign a random challenge to the user
 function assignRandomchallenge($db, $user_id, $day) {
