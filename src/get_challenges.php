@@ -45,7 +45,6 @@ function getChallenges() {
 
         // return !$submissionExists;
         foreach ($filteredChallenges as &$challenge) {
-            echo $challenge['id'];
             $stmt = $db->prepare('SELECT COUNT(*) FROM user_challenges WHERE user_id = ? AND day = ?');
             $stmt->execute([$user_id, $challenge['id']]);
             $submissionExists = $stmt->fetchColumn() > 0;

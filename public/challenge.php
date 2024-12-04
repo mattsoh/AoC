@@ -17,6 +17,9 @@ require_once '../src/challenge.php';
 </head>
 <body>
     <h1>Challenge <?php echo htmlspecialchars($challenge_id); ?></h1>
+    <a href="logout.php" class="logout-btn">Logout</a>
+    <a href="leaderboard.php">Go to Leaderboard</a>
+    <a href="dashboard.php" class="logout-btn">Back to challenges</a>
     <p><?php echo nl2br(htmlspecialchars($problem_description)); ?></p>
     <p>Get your puzzle input <a href="/challenge_input.php?day=<?php echo htmlspecialchars($challenge_id); ?>">here</a>. Triple-click to select all!</p>
     <form method="POST" action="/submit_answer.php?day=<?php echo htmlspecialchars($challenge_id); ?>">

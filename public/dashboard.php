@@ -40,7 +40,7 @@ require_once '../src/get_challenges.php';
         <table>
         <thead>
             <tr>
-                <th>Day</th>
+                <th>Challenge</th>
                 <th>Name</th>
             </tr>
         </thead>
@@ -55,5 +55,8 @@ require_once '../src/get_challenges.php';
     </table>
         </div>
     </div>
+    <footer>
+        <p>Made by Matthew, a Year 10 student.</p>
+    </footer>
 </body>
 </html>
