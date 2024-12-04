@@ -47,15 +47,15 @@ if (trim($user_answer) === trim($expected_output)) {
         echo 'Challenge not yet unlocked.';
         exit;
     }
-    if ($minutes <= 10) {
-        $score = 1000 - ($minutes * 50);
-    } elseif ($minutes <= 60) {
-        $score = 1000 - (10 * 50) - (floor(($minutes - 10) / 10) * 100);
+    if ($minutes <= 60) {
+        $score = 100 - ($minutes);
+    } elseif ($minutes <= 300) {
+        $score = 40 - (floor(($minutes - 60) / 15)*2);
     } else {
-        $score = 1000 - (10 * 50) - (5 * 100) - (floor(($minutes - 60) / 60) * 100);
+        $score = 40 - (floor(($minutes - 300) / 60));
     }
 
-    if ($score < 0) {
+    if ($score < 5) {
         $score = 5;
     }
     // Update the leaderboard
