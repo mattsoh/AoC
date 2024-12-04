@@ -6,7 +6,7 @@ session_start();
 
 // Fetch the top 10 leaderboard data sorted by total_score in descending order
 // $stmt = $db->prepare('SELECT * FROM leaderboard ORDER BY total_score DESC LIMIT 10');
-$stmt = $db->prepare('SELECT leaderboard.*, users.username FROM leaderboard INNER JOIN users ON leaderboard.user_id = users.id ORDER BY total_score DESC LIMIT 10');
+$stmt = $db->prepare('SELECT leaderboard.*, users.username, users.year_group FROM leaderboard INNER JOIN users ON leaderboard.user_id = users.id ORDER BY total_score DESC LIMIT 10');
 $stmt->execute();
 $leaderboard = $stmt->fetchAll();
 
@@ -42,8 +42,11 @@ foreach ($leaderboard as $entry) {
     if ($prev != $entry['total_score']) {
         echo "<td>{$rank}</td>";
         $prev_rank = $rank;
+        $prev = $entry['total_score'];
+    }else {
+        echo "<td>{$prev_rank}</td>";
     }
-    echo "<td>" . htmlspecialchars($entry['username']) . "</td>";
+    echo "<td>" . htmlspecialchars($entry['username']) . " (Y".$entry['year_group'].")</td>";
     echo "<td>{$entry['total_score']}</td>";    
     echo "</tr>";
     $rank++;

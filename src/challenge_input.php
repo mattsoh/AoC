@@ -65,9 +65,10 @@ if ($day === null || $day < 1 || $day > 25) {
 }
 
 // Define the file path
-$file_path = __DIR__ . "/../challenges/{$day}/test/{$challenge_id}.in";
+$file_path =  "https://storage.googleapis.com/aoc-challenges/challenges/{$day}/test/{$challenge_id}.in";
 // Check if the challenge input file exists
-if (file_exists($file_path)) {
+$headers = get_headers($file_path);
+if ($headers && strpos($headers[0], '200') !== false) {
     $challenge_input = file_get_contents($file_path);
 } else {
     $challenge_input = 'challenge input file not found.';

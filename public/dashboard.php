@@ -46,7 +46,7 @@ require_once '../src/get_challenges.php';
         </thead>
         <tbody>
             <?php foreach ($challenges as $challenge): ?>
-                <tr class="clickable-row" data-href="/challenge.php?day=<?php echo $challenge['id']; ?>">
+                <tr class="clickable-row" data-href="/challenge.php?day=<?php echo $challenge['id']; ?>" style="background-color: <?php echo $challenge['submission_exists'] ? 'green' : 'transparent'; ?>;">
                     <td><?php echo $challenge['id']; ?></td>
                     <td><?php echo htmlspecialchars($challenge['title']); ?></td>
                 </tr>

@@ -17,10 +17,10 @@ if ($release_day) {
     }
 }
 // Path to the challenge description file (outside the public directory)
-$challenge_file_path = __DIR__ . "/../challenges/{$challenge_id}/desc.txt";
+$challenge_file_path = "https://storage.googleapis.com/aoc-challenges/challenges/{$challenge_id}/desc.txt";
 
-// Check if the file exists
-if (file_exists($challenge_file_path)) {
+$headers = get_headers($challenge_file_path);
+if ($headers && strpos($headers[0], '200') !== false) {
     // Read the content of the challenge description file
     $problem_description = file_get_contents($challenge_file_path);
 } else {
