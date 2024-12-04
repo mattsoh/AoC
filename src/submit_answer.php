@@ -43,7 +43,10 @@ if (trim($user_answer) === trim($expected_output)) {
     $start_time = new DateTime("2024-12-{$day} 08:30:00");
     $interval = $start_time->diff($submission_time);
     $minutes = $interval->days * 24 * 60 + $interval->h * 60 + $interval->i;
-
+    if ($minutes < 0){
+        echo 'Challenge not yet unlocked.';
+        exit;
+    }
     if ($minutes <= 10) {
         $score = 1000 - ($minutes * 50);
     } elseif ($minutes <= 60) {

@@ -27,6 +27,12 @@ function getChallenges(){
         
         // Return challenges as JSON
         return [$challenges, $user['username']];
+        $filteredChallenges = array_filter($challenges, function($challenge) {
+        $releaseDate = new DateTime('2024-12-' . $challenge['release_day'] . ' 08:30:00');
+        $cutoffDate = new DateTime();
+        return $releaseDate >= $cutoffDate;
+        });
+    return [$filteredChallenges, $user['username']];
     } catch (PDOException $e) {
         // Handle potential database errors
         return json_encode(['error' => 'Database error: ' . $e->getMessage()]);

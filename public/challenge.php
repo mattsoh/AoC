@@ -5,16 +5,7 @@ if ($challenge_id < 1 || $challenge_id > 25) {
     $challenge_id = 1;
 }
 
-// Path to the challenge description file (outside the public directory)
-$challenge_file_path = __DIR__ . "/../challenges/{$challenge_id}/desc.txt";
-
-// Check if the file exists
-if (file_exists($challenge_file_path)) {
-    // Read the content of the challenge description file
-    $problem_description = file_get_contents($challenge_file_path);
-} else {
-    $problem_description = "Challenge not found.";
-}
+require_once '../src/challenge.php';
 ?>
 
 <!DOCTYPE html>

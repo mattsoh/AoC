@@ -34,7 +34,7 @@ require_once '../src/get_challenges.php';
     <div class="container">
         <h1>Welcome, <?php echo $user?></h1>
         <a href="logout.php" class="logout-btn">Logout</a>
-
+        <a href="leaderboard.php">Go to Leaderboard</a>
         <h2>Daily Challenges</h2>
         <div class="challenges-list">
         <table>

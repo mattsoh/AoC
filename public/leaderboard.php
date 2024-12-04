@@ -22,12 +22,15 @@ if (isset($_SESSION['user_id'])) {
     
     if ($user_data) {
         $user_score = $user_data['total_score'];
+    } else {
+        $user_score = 0;
     }
 }
 
 // Display the leaderboard
 echo "<h1>Leaderboard</h1>";
 echo "<a href='logout.php' class='logout-btn'>Logout</a>";
+echo "<a href='dashboard.php' class='logout-btn'>Go back to dashboard</a>";
 echo "<table align='center' border='1'>";
 echo "<tr><th>Rank</th><th>Username</th><th>Total Score</th></tr>";
 

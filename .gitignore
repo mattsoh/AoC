@@ -14,5 +14,8 @@
 .DS_Store
 Thumbs.db
 
-/src/database.db
+/vendor
+composer.json
+composer.lock
 
+Procfile

@@ -18,6 +18,25 @@ if ($day === null || $day < 1 || $day > 25) {
     echo 'Invalid day.';
     exit;
 }
+// Fetch the release day for the challenge
+$stmt = $db->prepare('SELECT release_day FROM challenges WHERE id = ?');
+$stmt->execute([$day]);
+$release_day = $stmt->fetchColumn();
+
+if (!$release_day) {
+    echo 'Challenge not found.';
+    exit;
+}
+// Check if the current date is after the release date
+$release_date = new DateTime("2024-12-{$release_day} 08:30:00", new DateTimeZone('UTC'));
+$current_date = new DateTime('now', new DateTimeZone('UTC'));
+
+if ($current_date < $release_date) {
+    echo 'Please wait until the challenge unlocks.';
+    exit;
+}
+echo 'Challenge not found.';
+exit;
 $user_id = $_SESSION['user_id'];
 // Function to assign a random challenge to the user
 function assignRandomchallenge($db, $user_id, $day) {
