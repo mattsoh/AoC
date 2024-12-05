@@ -11,7 +11,7 @@ global $user_id;
 echo $day;
 echo $user_id;
 try {
-$stmt = $db->prepare('SELECT release_day FROM challenges WHERE day = ?');
+$stmt = $db->prepare('SELECT release_day FROM challenges WHERE id = ?');
 if (!$stmt) {
     throw new Exception('Failed to prepare the database query.');
 }
