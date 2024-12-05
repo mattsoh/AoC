@@ -21,8 +21,10 @@ if ($challenge_id < 1 || $challenge_id > 25) {
     <a href="logout.php" class="logout-btn">Logout</a>
     <a href="leaderboard.php">Go to Leaderboard</a>
     <a href="dashboard.php" class="logout-btn">Back to challenges</a>
+    <br>
     <p><?php require_once '../src/challenge.php';?></p>
-    <p>Get your puzzle input <a href="/challenge_input.php?day=<?php echo htmlspecialchars($challenge_id); ?>">here</a>. Triple-click to select all!</p>
+    <br>
+    <p>Get your puzzle input <a href="/challenge_input.php?day=<?php echo htmlspecialchars($challenge_id); ?>" target="_blank">here</a>. Triple-click to select all!</p>
     <form method="POST" action="/submit_answer.php?day=<?php echo htmlspecialchars($challenge_id); ?>">
         <label for="answer">Your Answer:</label><br>
         <input type="text" name="user_answer" id="user_answer" required><br><br>
