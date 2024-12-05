@@ -16,7 +16,7 @@ if (!$stmt) {
     throw new Exception('Failed to prepare the database query.');
 }
 $stmt->execute([$day]);
-$release_day = $stmt->fetch(PDO::FETCH_ASSOC);
+$release_day = $stmt->fetch(PDO::FETCH_ASSOC)['release_day'];
 $submission_time = new DateTime('now', new DateTimeZone('UTC'));
 $start_time = new DateTime("2024-12-{$release_day} 08:30:00", new DateTimeZone('UTC'));
 
@@ -33,7 +33,7 @@ if (!$stmt->execute([$user_id, $day])) {
     throw new Exception('Failed to execute the database query.');
 }
 
-$challenge = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch associative array
+$challenge = $stmt->fetch(PDO::FETCH_ASSOC)['challenge_day']; // Fetch associative array
 if (!$challenge) {
     die('Specified challenge does not exist. Maybe read the input first?');
 }
