@@ -18,7 +18,7 @@ if ($release_day) {
 }
 // Path to the challenge description file (outside the public directory)
 $challenge_file_path = "https://storage.googleapis.com/aoc-challenges/challenges/{$challenge_id}/desc.txt";
-
+echo $challenge_file_path;
 $headers = get_headers($challenge_file_path);
 if ($headers && strpos($headers[0], '200') !== false) {
     // Read the content of the challenge description file
