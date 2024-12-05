@@ -22,8 +22,8 @@ echo $challenge_file_path;
 $headers = get_headers($challenge_file_path);
 if ($headers && strpos($headers[0], '200') !== false) {
     // Read the content of the challenge description file
-    $problem_description = file_get_contents($challenge_file_path);
+    echo file_get_contents($challenge_file_path);
 } else {
-    $problem_description = "Challenge not found.";
+    echo "Challenge not found.";
 }
 ?>
