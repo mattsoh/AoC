@@ -47,7 +47,6 @@ $challenge_id = $challenge['challenge_id'];
 
 // Path to the expected output file
 $expected_output_file = "https://storage.googleapis.com/aoc-challenges/challenges/{$day}/test/{$challenge_id}.out";
-echo $expected_output_file;
 $headers = get_headers($expected_output_file);
 if ($headers && strpos($headers[0], '200') == false) {
     die('Expected output file does not exist.');
