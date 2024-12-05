@@ -1,4 +1,5 @@
 <?php
+$problem_description = "";
 // Get the challenge ID from the URL (default to 1 if not provided)
 $challenge_id = isset($_GET['day']) ? (int) $_GET['day'] : 1;
 if ($challenge_id < 1 || $challenge_id > 25) {
