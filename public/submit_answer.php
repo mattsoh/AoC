@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
     } else {
-        $error_message = 'You must be logged in to submit an answer.';
+        echo 'You must be logged in to submit an answer.';
         exit;
     }
     $day = isset($_GET['day']) ? (int)$_GET['day'] : 0;

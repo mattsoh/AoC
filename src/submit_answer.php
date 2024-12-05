@@ -8,8 +8,6 @@ require_once 'database.php'; // Adjust the path as necessary
 
 global $day;
 global $user_id;
-echo $day;
-echo $user_id;
 try {
 $stmt = $db->prepare('SELECT release_day FROM challenges WHERE id = ?');
 if (!$stmt) {
@@ -33,7 +31,7 @@ if (!$stmt->execute([$user_id, $day])) {
     throw new Exception('Failed to execute the database query.');
 }
 
-$challenge = $stmt->fetch(PDO::FETCH_ASSOC)['challenge_id']; // Fetch associative array
+$challenge = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch associative array
 if (!$challenge) {
     die('Specified challenge does not exist. Maybe read the input first?');
 }
@@ -49,7 +47,7 @@ $challenge_id = $challenge['challenge_id'];
 
 // Path to the expected output file
 $expected_output_file = "https://storage.googleapis.com/aoc-challenges/challenges/{$day}/test/{$challenge_id}.out";
-
+echo $expected_output_file;
 $headers = get_headers($expected_output_file);
 if ($headers && strpos($headers[0], '200') == false) {
     die('Expected output file does not exist.');
