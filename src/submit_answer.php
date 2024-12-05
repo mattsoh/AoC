@@ -5,13 +5,14 @@
 
 // Optionally, verify that the challenge exists for the specified day
 require_once 'database.php'; // Adjust the path as necessary
+
+global $day;
 $submission_time = new DateTime(new DateTimeZone('UTC'));
 $start_time = new DateTime("2024-12-{$day} 08:30:00", new DateTimeZone('UTC'));
 if ($submission_time < $start_time) {
     echo 'Challenge not yet unlocked.';
     exit;
 }
-global $day;
 $stmt = $db->prepare('SELECT challenge_id FROM user_challenges WHERE user_id = ? AND day = ?');
 $stmt->execute([$_SESSION['user_id'], $day]);
 $challenge = $stmt->fetch(PDO::FETCH_ASSOC);

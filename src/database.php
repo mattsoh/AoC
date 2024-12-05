@@ -2,11 +2,11 @@
 // src/database.php
 
 // Retrieve environment variables
-$dbHost = getenv('DB_HOST') ?: '34.142.98.105';
-$dbPort = getenv('DB_PORT') ?: 3306;
-$dbUser = getenv('DB_USER') ?: 'mattsoh';
-$dbPass = getenv('DB_PASS') ?: 'mattsoh';
-$dbName = getenv('DB_NAME') ?: 'aoc';
+$dbHost = getenv('DB_HOST');
+$dbPort = getenv('DB_PORT');
+$dbUser = getenv('DB_USER');
+$dbPass = getenv('DB_PASS');
+$dbName = getenv('DB_NAME');
 
 try {
     // Data Source Name
