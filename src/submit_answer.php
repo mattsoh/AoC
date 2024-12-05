@@ -7,6 +7,7 @@
 require_once 'database.php'; // Adjust the path as necessary
 
 global $day;
+global $user_id;
 $stmt = $db->prepare('SELECT release_day FROM challenges WHERE day = ?');
 if (!$stmt) {
     throw new Exception('Failed to prepare the database query.');
@@ -68,7 +69,7 @@ if (trim($user_answer) === trim($expected_output)) {
     } elseif ($minutes <= 300) {
         $score = 40 - (floor(($minutes - 60) / 15)*2);
     } else {
-        $score = 40 - (floor(($minutes - 300) / 60));
+        $score = 8 - (floor(($minutes - 300) / 60));
     }
 
     if ($score < 5) {
@@ -76,18 +77,18 @@ if (trim($user_answer) === trim($expected_output)) {
     }
     // Update the leaderboard
     $stmt = $db->prepare('SELECT SUM(score) as total_score FROM answers WHERE user_id = ?');
-    $stmt->execute([$_SESSION['user_id']]);
+    $stmt->execute([$user_id]);
     $total_score = $stmt->fetch(PDO::FETCH_ASSOC)['total_score'];
     if (!$total_score) {
         $total_score = 0;
     }
     $stmt = $db->prepare('SELECT * FROM leaderboard WHERE user_id = ?');
-    $stmt->execute([$_SESSION['user_id']]);
+    $stmt->execute([$user_id]);
     $leaderboard_entry = $stmt->fetch(PDO::FETCH_ASSOC);
     $total_score += $score;
     if ($leaderboard_entry) {
         $stmt = $db->prepare('UPDATE leaderboard SET total_score = ? WHERE user_id = ?');
-        $stmt->execute([$total_score, $_SESSION['user_id']]);
+        $stmt->execute([$total_score, $user_id]);
     } else {
         // $stmt = $db->prepare('SELECT username FROM users WHERE id = ?');
         // $stmt->execute([$_SESSION['user_id']]);
