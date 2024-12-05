@@ -7,20 +7,40 @@
 require_once 'database.php'; // Adjust the path as necessary
 
 global $day;
-$submission_time = new DateTime(new DateTimeZone('UTC'));
-$start_time = new DateTime("2024-12-{$day} 08:30:00", new DateTimeZone('UTC'));
+$stmt = $db->prepare('SELECT release_day FROM challenges WHERE day = ?');
+if (!$stmt) {
+    throw new Exception('Failed to prepare the database query.');
+}
+$stmt->execute([$day]);
+$release_day = $stmt->fetch(PDO::FETCH_ASSOC);
+$submission_time = new DateTime('now', new DateTimeZone('UTC'));
+$start_time = new DateTime("2024-12-{$release_day} 08:30:00", new DateTimeZone('UTC'));
+
 if ($submission_time < $start_time) {
     echo 'Challenge not yet unlocked.';
     exit;
 }
-$stmt = $db->prepare('SELECT challenge_id FROM user_challenges WHERE user_id = ? AND day = ?');
-$stmt->execute([$_SESSION['user_id'], $day]);
-$challenge = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$stmt = $db->prepare('SELECT challenge_id FROM user_challenges WHERE user_id = ? AND day = ?');
+if (!$stmt) {
+    throw new Exception('Failed to prepare the database query.');
+}
+if (!$stmt->execute([$user_id, $day])) {
+    throw new Exception('Failed to execute the database query.');
+}
+
+$challenge = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch associative array
 if (!$challenge) {
     die('Specified challenge does not exist. Maybe read the input first?');
 }
-
+$stmt = $db->prepare('SELECT * FROM answers WHERE user_id = ? AND day = ?');
+$stmt->execute([$_SESSION['user_id'], $day]);
+$existing_answer = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($existing_answer) {
+    echo 'Already submitted.<br>';
+    echo '<a href="/dashboard.php">Back to dashboard</a>';
+    exit;
+}
 $challenge_id = $challenge['challenge_id'];
 
 // Path to the expected output file
@@ -38,15 +58,9 @@ $expected_output = file_get_contents($expected_output_file);
 if (trim($user_answer) === trim($expected_output)) {
     require_once 'database.php'; // Adjust the path as necessary
     // Check if the answer has already been submitted for the day by the user
-    $stmt = $db->prepare('SELECT * FROM answers WHERE user_id = ? AND day = ?');
-    $stmt->execute([$_SESSION['user_id'], $day]);
-    $existing_answer = $stmt->fetch(PDO::FETCH_ASSOC);
+    
 
-    if ($existing_answer) {
-        echo 'Already submitted.<br>';
-        echo '<a href="/dashboard.php">Back to dashboard</a>';
-        exit;
-    }
+    
     $interval = $start_time->diff($submission_time);
     $minutes = $interval->days * 24 * 60 + $interval->h * 60 + $interval->i;
     if ($minutes <= 60) {

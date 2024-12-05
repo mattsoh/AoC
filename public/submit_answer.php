@@ -9,6 +9,12 @@ $error_message = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+    } else {
+        $error_message = 'You must be logged in to submit an answer.';
+        exit;
+    }
     $day = isset($_GET['day']) ? (int)$_GET['day'] : 0;
     $user_answer = isset($_POST['user_answer']) ? trim($_POST['user_answer']) : '';
     // Validate 'day'
