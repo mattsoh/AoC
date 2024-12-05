@@ -33,7 +33,7 @@ if (!$stmt->execute([$user_id, $day])) {
     throw new Exception('Failed to execute the database query.');
 }
 
-$challenge = $stmt->fetch(PDO::FETCH_ASSOC)['challenge_day']; // Fetch associative array
+$challenge = $stmt->fetch(PDO::FETCH_ASSOC)['challenge_id']; // Fetch associative array
 if (!$challenge) {
     die('Specified challenge does not exist. Maybe read the input first?');
 }
