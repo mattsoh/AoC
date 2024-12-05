@@ -8,6 +8,9 @@ require_once 'database.php'; // Adjust the path as necessary
 
 global $day;
 global $user_id;
+echo $day;
+echo $user_id;
+try {
 $stmt = $db->prepare('SELECT release_day FROM challenges WHERE day = ?');
 if (!$stmt) {
     throw new Exception('Failed to prepare the database query.');
@@ -106,5 +109,8 @@ if (trim($user_answer) === trim($expected_output)) {
 } else {
     echo 'Incorrect answer.';
     echo "<a href=\"/challenge.php?day={$day}\">Back to challenge</a>";
+}}
+catch (Exception $e) {
+    echo 'An error occurred: ' . $e->getMessage();
 }
 ?>
