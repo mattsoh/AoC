@@ -22,7 +22,7 @@ $challenge_file_path = "https://storage.googleapis.com/aoc-challenges/challenges
 $headers = get_headers($challenge_file_path);
 if ($headers && strpos($headers[0], '200') !== false) {
     // Read the content of the challenge description file
-    echo htmlspecialchars(file_get_contents($challenge_file_path));
+    echo nl2br(file_get_contents($challenge_file_path));
 } else {
     echo "Challenge not found.";
 }
