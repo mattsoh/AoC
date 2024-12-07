@@ -73,5 +73,5 @@ if ($headers && strpos($headers[0], '200') !== false) {
 } else {
     $challenge_input = 'challenge input file not found.';
 }
-echo $challenge_input;
+echo nl2br($challenge_input);
 ?>
