@@ -3,16 +3,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https') {
-    // Redirect to HTTPS if not already using HTTPS
-    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-    exit();
-} elseif (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
-    // Check for traditional HTTPS server variable
-    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-    exit();
-}
-
 // Retrieve environment variables
 $dbHost = getenv('DB_HOST');
 $dbPort = getenv('DB_PORT');
