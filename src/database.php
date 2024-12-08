@@ -2,7 +2,12 @@
 // src/database.php
 
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https') {
-    header("Location: https://aoc.mattsoh.dev");
+    // Redirect to HTTPS if not already using HTTPS
+    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    exit();
+} elseif (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
+    // Check for traditional HTTPS server variable
+    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     exit();
 }
 
