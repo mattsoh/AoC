@@ -1,6 +1,8 @@
 <?php
 // src/database.php
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https') {
     // Redirect to HTTPS if not already using HTTPS
     header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
