@@ -10,9 +10,9 @@ $dbUser = getenv('DB_USER');
 $dbPass = getenv('DB_PASS');
 $dbName = getenv('DB_NAME');
 
-$ssl_ca = getenv('MYSQL_SSL_CA');
-$ssl_cert = getenv('MYSQL_SSL_CERT');
-$ssl_key = getenv('MYSQL_SSL_KEY');
+// $ssl_ca = getenv('MYSQL_SSL_CA');
+// $ssl_cert = getenv('MYSQL_SSL_CERT');
+// $ssl_key = getenv('MYSQL_SSL_KEY');
 
 try {
     // Data Source Name (DSN) for PDO with MySQL
@@ -23,9 +23,9 @@ try {
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
-        PDO::MYSQL_ATTR_SSL_CA       => $ssl_ca,
-        PDO::MYSQL_ATTR_SSL_CERT     => $ssl_cert,
-        PDO::MYSQL_ATTR_SSL_KEY      => $ssl_key,
+        // PDO::MYSQL_ATTR_SSL_CA       => $ssl_ca,
+        // PDO::MYSQL_ATTR_SSL_CERT     => $ssl_cert,
+        // PDO::MYSQL_ATTR_SSL_KEY      => $ssl_key,
     ];
 
     // Create a new PDO instance with SSL connection options
