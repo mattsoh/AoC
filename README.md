@@ -9,4 +9,4 @@ This is a simple platform where users can log in, view daily coding challenges, 
 - PHP (for backend)
 - SQLite (for database)
 - HTML/CSS (for frontend)
-Disclaimers: This was 60% created by ChatGPT.
+Disclaimers: This README.md was 60% created by ChatGPT.
